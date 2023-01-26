@@ -4,6 +4,8 @@ import br.com.dslearn.enums.ResourceType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,13 +19,16 @@ public class Resource implements Serializable {
     private String title;
     private String description;
     private Integer position;
-    private String imgUrl;
+    private String imgUri;
     private ResourceType type;
     private String externalLink;
 
     @ManyToOne
     @JoinColumn(name = "offer_id")
     private Offer offer;
+
+    @OneToMany(mappedBy = "resource")
+    private List<Section> sections = new ArrayList<>();
 
     public Resource() {
     }
@@ -60,12 +65,12 @@ public class Resource implements Serializable {
         this.position = position;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImgUri() {
+        return imgUri;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgUri(String imgUrl) {
+        this.imgUri = imgUrl;
     }
 
     public ResourceType getType() {
@@ -100,13 +105,13 @@ public class Resource implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Resource resource = (Resource) o;
         return id.equals(resource.id) && Objects.equals(title, resource.title) && Objects.equals(description,
-                resource.description) && Objects.equals(position, resource.position) && Objects.equals(imgUrl,
-                resource.imgUrl) && Objects.equals(type, resource.type) && Objects.equals(externalLink,
+                resource.description) && Objects.equals(position, resource.position) && Objects.equals(imgUri,
+                resource.imgUri) && Objects.equals(type, resource.type) && Objects.equals(externalLink,
                 resource.externalLink);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, position, imgUrl, type, externalLink);
+        return Objects.hash(id, title, description, position, imgUri, type, externalLink);
     }
 }
