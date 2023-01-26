@@ -60,6 +60,10 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
