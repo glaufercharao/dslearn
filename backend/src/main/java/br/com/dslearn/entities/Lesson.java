@@ -28,7 +28,7 @@ public abstract class Lesson implements Serializable {
                         @JoinColumn(name = "offer_id")
              }
      )
-     private Set<Enrollment> enrollmentsDome = new HashSet<>();
+     private Set<Enrollment> enrollmentsDone = new HashSet<>();
 
     public Lesson() {
     }
@@ -72,8 +72,8 @@ public abstract class Lesson implements Serializable {
         this.section = section;
     }
 
-    public Set<Enrollment> getEnrollmentsDome() {
-        return enrollmentsDome;
+    public Set<Enrollment> getEnrollmentsDone() {
+        return enrollmentsDone;
     }
 
     @Override
@@ -81,11 +81,11 @@ public abstract class Lesson implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lesson lesson = (Lesson) o;
-        return id.equals(lesson.id) && Objects.equals(title, lesson.title) && Objects.equals(position, lesson.position) && Objects.equals(section, lesson.section) && Objects.equals(enrollmentsDome, lesson.enrollmentsDome);
+        return id.equals(lesson.id) && Objects.equals(title, lesson.title) && Objects.equals(position, lesson.position) && Objects.equals(section, lesson.section) && Objects.equals(enrollmentsDone, lesson.enrollmentsDone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, position, section, enrollmentsDome);
+        return Objects.hash(id, title, position, section, enrollmentsDone);
     }
 }
