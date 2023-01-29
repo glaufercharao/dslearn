@@ -26,3 +26,6 @@ INSERT INTO tb_resource (title, description, position, img_uri, type, offer_id) 
 INSERT INTO tb_section (title, description, position, img_uri, resource_id, prerequisite_id) VALUES ('Capitulo 1', 'Neste capilo vamos criar o projeto', 1, 'http://blog.coursify.me/wp-content/uploads/2017/12/conteudo-para-cursos-online-blog.jpg', 1, null);
 INSERT INTO tb_section (title, description, position, img_uri, resource_id, prerequisite_id) VALUES ('Capitulo 2', 'Neste capilo desenvolver o crud', 2, 'http://blog.coursify.me/wp-content/uploads/2017/12/conteudo-para-cursos-online-blog.jpg', 1, 1);
 INSERT INTO tb_section (title, description, position, img_uri, resource_id, prerequisite_id) VALUES ('Capitulo 3', 'Neste capilo vamos finalizar projeto', 3, 'http://blog.coursify.me/wp-content/uploads/2017/12/conteudo-para-cursos-online-blog.jpg', 1, 2);
+
+INSERT INTO tb_enrollment (user_id, offer_id, enroll_moment, refund_moment, available, only_update) VALUES (1, 1, TIMESTAMP WITH TIME ZONE '2023-01-30T13:00:00Z', null, true, false);
+INSERT INTO tb_enrollment (user_id, offer_id, enroll_moment, refund_moment, available, only_update) VALUES (2, 1, TIMESTAMP WITH TIME ZONE '2023-01-30T13:00:00Z', null, true, false);
