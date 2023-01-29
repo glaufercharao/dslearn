@@ -2,18 +2,12 @@ package br.com.dslearn.services;
 
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
-
-import br.com.dslearn.entities.Role;
+import br.com.dslearn.dto.UserDTO;
 import br.com.dslearn.entities.User;
 import br.com.dslearn.repositories.RoleRepository;
 import br.com.dslearn.repositories.UserRepository;
-import br.com.dslearn.services.exceptions.DatabaseException;
 import br.com.dslearn.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -39,12 +33,12 @@ public class UserService implements UserDetailsService {
 //        return list.map(x -> new UserDTO(x));
 //    }
 //
-//    @Transactional(readOnly = true)
-//    public UserDTO findById(Long id) {
-//        Optional<User> obj = userRepository.findById(id);
-//        User entity = obj.orElseThrow(()-> new ResourceNotFoundException("Entity not found"));
-//        return new UserDTO(entity);
-//    }
+    @Transactional(readOnly = true)
+    public UserDTO findById(Long id) {
+        Optional<User> obj = userRepository.findById(id);
+        User entity = obj.orElseThrow(()-> new ResourceNotFoundException("Entity not found"));
+        return new UserDTO(entity);
+    }
 //
 //    @Transactional
 //    public UserDTO insert(UserInsertDTO userDTO) {
