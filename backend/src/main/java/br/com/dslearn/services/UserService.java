@@ -20,7 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
-    
+
+    @Autowired
+    private AuthService authService;
     @Autowired
     private RoleRepository roleRepository;
     
@@ -35,6 +37,8 @@ public class UserService implements UserDetailsService {
 //
     @Transactional(readOnly = true)
     public UserDTO findById(Long id) {
+        authService.validateSelfOrAdmin(id);
+
         Optional<User> obj = userRepository.findById(id);
         User entity = obj.orElseThrow(()-> new ResourceNotFoundException("Entity not found"));
         return new UserDTO(entity);
