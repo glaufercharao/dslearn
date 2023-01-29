@@ -2,9 +2,7 @@ package br.com.dslearn.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_user")
@@ -18,6 +16,8 @@ public class User implements Serializable {
     private String email;
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name="tb_user_role",
             joinColumns = @JoinColumn(name= "user_id"),
@@ -62,6 +62,9 @@ public class User implements Serializable {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+    public List<Notification> getNotifications() {
+        return notifications;
     }
 
     @Override

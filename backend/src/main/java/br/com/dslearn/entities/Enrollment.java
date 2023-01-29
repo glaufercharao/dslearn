@@ -5,8 +5,7 @@ import br.com.dslearn.entities.pk.EnrollmentPk;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_enrollment")
@@ -24,6 +23,9 @@ public class Enrollment implements Serializable {
     private boolean onlyUpdate;
     @ManyToMany(mappedBy = "enrollmentsDone")
     private Set<Lesson> lessonsDone = new HashSet<>();
+
+    @OneToMany(mappedBy = "enrollment")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     public Enrollment() {
     }
@@ -83,5 +85,22 @@ public class Enrollment implements Serializable {
 
     public void setOnlyUpdate(boolean onlyUpdate) {
         this.onlyUpdate = onlyUpdate;
+    }
+
+    public List<Deliver> getDeliveries() {
+        return deliveries;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Enrollment that = (Enrollment) o;
+        return available == that.available && onlyUpdate == that.onlyUpdate && id.equals(that.id) && Objects.equals(enrollMoment, that.enrollMoment) && Objects.equals(refundMoment, that.refundMoment) && Objects.equals(lessonsDone, that.lessonsDone) && Objects.equals(deliveries, that.deliveries);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, enrollMoment, refundMoment, available, onlyUpdate, lessonsDone, deliveries);
     }
 }
